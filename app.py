@@ -5,7 +5,7 @@ import tensorflow as tf
 from PIL import Image
 from flask import Flask, request, jsonify
 
-model = tf.keras.models.load_model('model/NutriCheck_model.h5')
+model = tf.keras.models.load_model('model\checkpoint_NutriCheck_MobileNet.keras')
 
 class_names = [
     "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
