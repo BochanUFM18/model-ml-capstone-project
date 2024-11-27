@@ -4,7 +4,7 @@ import tensorflow as tf  # Sesuaikan dengan library yang Anda gunakan
 app = Flask(__name__)
 
 # Load model ML
-model = tf.keras.models.load_model('model\NutriCheck_model.h5')  # Sesuaikan dengan format model Anda
+model = tf.keras.models.load_model('D:\mode-ml\ML_NutriCheck\model\NutriCheck_model.h5')  # Sesuaikan dengan format model Anda
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -15,5 +15,5 @@ def predict():
     return jsonify({'prediction': prediction.tolist()})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(host='0.0.0.0', port=8080)
 

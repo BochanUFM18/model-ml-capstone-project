@@ -1,19 +1,18 @@
+
+# Gunakan image Python resmi
 FROM python:3.10.9-slim
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Salin file requirements.txt terlebih dahulu
-COPY requirements.txt /app/
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Flask, pandas, TensorFlow, and scikit-learn
+RUN pip install -r requirements.txt
 
-# Salin seluruh aplikasi setelah dependensi diinstall
-COPY . /app/
-
-# Expose port untuk aplikasi Flask
+# Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-# Command untuk menjalankan aplikasi Flask
-CMD ["python", "app.py"]
+# Run app.py when the container launches
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8080"]
