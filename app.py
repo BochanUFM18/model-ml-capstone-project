@@ -21,7 +21,7 @@ class_names = [
     "takoyaki", "tiramisu", "waffles",
 ]
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 def preprocess_image(image):
     image = image.resize((224, 224))
@@ -52,5 +52,5 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("port", 8080)))
