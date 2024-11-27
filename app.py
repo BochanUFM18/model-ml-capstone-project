@@ -1,19 +1,56 @@
+import os
+import numpy as np
+import tensorflow as tf
+from PIL import Image
 from flask import Flask, request, jsonify
-import tensorflow as tf  # Sesuaikan dengan library yang Anda gunakan
 
-app = Flask(__name__)
+model = tf.keras.models.load_model('model\NutriCheck_model.h5')
 
-# Load model ML
-model = tf.keras.models.load_model('D:\mode-ml\ML_NutriCheck\model\NutriCheck_model.h5')  # Sesuaikan dengan format model Anda
+class_names = [
+    "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
+    "chicken porridge", "chicken wings", "chocolate_cake", "churros",
+    "cup_cakes", "donuts", "fish_and_chips", "french_fries",
+    "french_toast", "fried shrimp", "fried_rice", "gado-gado",
+    "green bean porridge", "grilled chicken", "gyoza", "hamburger",
+    "hot_dog", "ice_cream", "ikan bakar", "kupat tahu", "lasagna",
+    "macaroni_and_cheese", "macarons", "meatball", "nasi kuning",
+    "nasi uduk", "omelette", "oxtail soup", "oysters", "pad_thai",
+    "pancakes", "pizza", "ramen", "red_velvet_cake", "rendang",
+    "risotto", "samosa", "sashimi", "satay", "spaghetti_bolognese",
+    "spaghetti_carbonara", "spring_rolls", "steak", "sushi", "tacos",
+    "takoyaki", "tiramisu", "waffles",
+]
 
-@app.route('/predict', methods=['POST'])
+app = Flask(_name_)
+
+def preprocess_image(image):
+    image = image.resize((224, 224))
+    image_array = np.array(image) / 255.0  
+    image_array = np.expand_dims(image_array, axis=0)  
+    return image_array
+
+@app.route("/predict", methods=["POST"])
 def predict():
-    data = request.get_json()
-    # Preprocessing input data sesuai dengan model Anda
-    input_data = data['input']
-    prediction = model.predict(input_data)
-    return jsonify({'prediction': prediction.tolist()})
+    if "image" not in request.files:
+        return jsonify({"error": "No image file found"}), 400
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    image_file = request.files["image"]
+    if image_file.filename == "":
+        return jsonify({"error": "No selected file"}), 400
 
+    try:
+        image = Image.open(image_file)
+        image_array = preprocess_image(image)
+
+        prediction = model.predict(image_array)
+
+        predicted_class_idx = np.argmax(prediction[0])
+        predicted_class = class_names[predicted_class_idx]
+
+        return jsonify({"predicted_class": predicted_class})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+if _name_ == "_main_":
+    app.run(debug=True, host="0.0.0.0", port=5000)
