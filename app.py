@@ -1,11 +1,10 @@
-
 import os
 import numpy as np
 import tensorflow as tf
 from PIL import Image
 from flask import Flask, request, jsonify
 
-model = tf.keras.models.load_model('model\checkpoint_NutriCheck_MobileNet.keras')
+model = tf.keras.models.load_model('model/NutriCheck_model.h5')
 
 class_names = [
     "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
@@ -22,7 +21,7 @@ class_names = [
     "takoyaki", "tiramisu", "waffles",
 ]
 
-app = Flask(__name__)  # Perbaikan di sini
+app = Flask(_name_)
 
 def preprocess_image(image):
     image = image.resize((224, 224))
@@ -53,5 +52,5 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == "__main__":  # Perbaikan di sini1
-    app.run(debug=True, host="0.0.0.0", port=8080)
+if _name_ == "_main_":
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("port", 8080)))
