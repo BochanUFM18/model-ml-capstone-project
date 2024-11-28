@@ -69,8 +69,8 @@ def get_nutrition():
         return jsonify({"error": "Food not found"}), 404
 
     # Convert to JSON
-    result = food_info.to_dict(orient="records")
-    return jsonify({"food_name": food_name, "nutrition_info": result}), 200
+    nutrition_info = food_info.iloc[0].to_dict()
+    return jsonify({"food_name": food_name, "nutrition_info": nutrition_info}), 200
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("port", 8080)))
