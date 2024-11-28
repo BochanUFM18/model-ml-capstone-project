@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify
 import pandas as pd
 
 model = tf.keras.models.load_model('model/NutriCheck_model.h5')
-nutrition_data = pd.read_csv("nutrition_data.csv")
+nutrition_data = pd.read_csv("dataset/nutrition_data.csv")
 
 class_names = [
     "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
