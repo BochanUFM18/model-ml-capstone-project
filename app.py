@@ -3,8 +3,10 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 from flask import Flask, request, jsonify
+import pandas as pd
 
 model = tf.keras.models.load_model('model/NutriCheck_model.h5')
+nutrition_data = pd.read_csv("nutrition_data.csv")
 
 class_names = [
     "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
@@ -52,6 +54,23 @@ def predict():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route("/nutrition", methods=["GET"])
+def get_nutrition():
+    food_name = request.args.get("food", None)
+    if not food_name:
+        return jsonify({"error": "Food name is required as a query parameter"}), 400
+
+    # Filter nutrition data
+    food_info = nutrition_data[nutrition_data["Food Name"].str.contains(
+        food_name, case=False, na=False)]
+    if food_info.empty:
+        return jsonify({"error": "Food not found"}), 404
+
+    # Convert to JSON
+    result = food_info.to_dict(orient="records")
+    return jsonify({"food_name": food_name, "nutrition_info": result}), 200
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("port", 8080)))
