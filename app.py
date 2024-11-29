@@ -50,7 +50,11 @@ def predict():
         predicted_class_idx = np.argmax(prediction[0])
         predicted_class = class_names[predicted_class_idx]
 
-        return jsonify({"predicted_class": predicted_class})
+        return jsonify({
+            "status": 200,
+            "message": "Prediction successful",
+            "food_name": predicted_class
+        }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -70,7 +74,12 @@ def get_nutrition():
 
     # Convert to JSON
     nutrition_info = food_info.iloc[0].to_dict()
-    return jsonify({"food_name": food_name, "nutrition_info": nutrition_info}), 200
+    return jsonify({
+        "status": 200,
+        "message": "Data retrieval successful",
+        "food_name": food_name,
+        "nutrition_info": nutrition_info
+    }), 200
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("port", 8080)))
