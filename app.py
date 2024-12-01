@@ -73,12 +73,23 @@ def get_nutrition():
         return jsonify({"error": "Food not found"}), 404
 
     # Convert to JSON
-    nutrition_info = food_info.iloc[0].to_dict()
+    food_data = food_info.iloc[0].to_dict()
     return jsonify({
-        "status": 200,
-        "message": "Data retrieval successful",
-        "food_name": food_name,
-        "nutrition_info": nutrition_info
+        "Food ID": food_data["Food ID"],
+        "Food Name": food_data["Food Name"],
+        "Calories": food_data["Calories"],
+        "Serving Size": food_data["Serving Size"],
+        "Serving Size (grams)": food_data["Serving Size (grams)"],
+        "nutritions": {
+            "Calcium": food_data["Calcium"],
+            "Dietary Fiber": food_data["Dietary Fiber"],
+            "Iron": food_data["Iron"],
+            "Protein": food_data["Protein"],
+            "Total Carbohydrate": food_data["Total Carbohydrate"],
+            "Vitamin A": food_data["Vitamin A"],
+            "Vitamin B": food_data["Vitamin B"],
+            "Vitamin C": food_data["Vitamin C"],
+        }
     }), 200
 
 if __name__ == "__main__":
