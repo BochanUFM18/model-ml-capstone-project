@@ -60,37 +60,5 @@ def predict():
         return jsonify({"error": str(e)}), 500
     
 
-@app.route("/nutrition", methods=["GET"])
-def get_nutrition():
-    food_name = request.args.get("food", None)
-    if not food_name:
-        return jsonify({"error": "Food name is required as a query parameter"}), 400
-
-    # Filter nutrition data
-    food_info = nutrition_data[nutrition_data["Food Name"].str.contains(
-        food_name, case=False, na=False)]
-    if food_info.empty:
-        return jsonify({"error": "Food not found"}), 404
-
-    # Convert to JSON
-    food_data = food_info.iloc[0].to_dict()
-    return jsonify({
-        "Food ID": food_data["Food ID"],
-        "Food Name": food_data["Food Name"],
-        "Calories": food_data["Calories"],
-        "Serving Size": food_data["Serving Size"],
-        "Serving Size (grams)": food_data["Serving Size (grams)"],
-        "nutritions": {
-            "Calcium": food_data["Calcium"],
-            "Dietary Fiber": food_data["Dietary Fiber"],
-            "Iron": food_data["Iron"],
-            "Protein": food_data["Protein"],
-            "Total Carbohydrate": food_data["Total Carbohydrate"],
-            "Vitamin A": food_data["Vitamin A"],
-            "Vitamin B": food_data["Vitamin B"],
-            "Vitamin C": food_data["Vitamin C"],
-        }
-    }), 200
-
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("port", 8080)))
