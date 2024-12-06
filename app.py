@@ -3,10 +3,8 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 from flask import Flask, request, jsonify
-import pandas as pd
 
 model = tf.keras.models.load_model('model/NutriCheck_model.h5')
-nutrition_data = pd.read_csv("dataset/nutrition_clean_dataset.csv")
 
 class_names = [
     "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
