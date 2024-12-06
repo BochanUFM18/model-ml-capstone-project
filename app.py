@@ -8,16 +8,16 @@ model = tf.keras.models.load_model('model/NutriCheck_model.h5')
 
 class_names = [
     "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
-    "chicken porridge", "chicken wings", "chocolate_cake", "churros",
-    "cup_cakes", "donuts", "fish_and_chips", "french_fries",
-    "french_toast", "fried shrimp", "fried_rice", "gado-gado",
+    "chicken porridge", "chicken wings", "chocolate cake", "churros",
+    "cup cakes", "donuts", "fish and chips", "french fries",
+    "french toast", "fried shrimp", "fried rice", "gado-gado",
     "green bean porridge", "grilled chicken", "gyoza", "hamburger",
-    "hot_dog", "ice_cream", "ikan bakar", "kupat tahu", "lasagna",
-    "macaroni_and_cheese", "macarons", "meatball", "nasi kuning",
-    "nasi uduk", "omelette", "oxtail soup", "oysters", "pad_thai",
-    "pancakes", "pizza", "ramen", "red_velvet_cake", "rendang",
-    "risotto", "samosa", "sashimi", "satay", "spaghetti_bolognese",
-    "spaghetti_carbonara", "spring_rolls", "steak", "sushi", "tacos",
+    "hot dog", "ice cream", "ikan bakar", "kupat tahu", "lasagna",
+    "macaroni and cheese", "macarons", "meatball", "nasi kuning",
+    "nasi uduk", "omelette", "oxtail soup", "oysters", "pad thai",
+    "pancakes", "pizza", "ramen", "red velvet cake", "rendang",
+    "risotto", "samosa", "sashimi", "satay", "spaghetti bolognese",
+    "spaghetti carbonara", "spring rolls", "steak", "sushi", "tacos",
     "takoyaki", "tiramisu", "waffles",
 ]
 
