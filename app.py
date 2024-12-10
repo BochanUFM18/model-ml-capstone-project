@@ -7,21 +7,63 @@ from flask import Flask, request, jsonify
 model = tf.keras.models.load_model('model/NutriCheck_model.h5')
 
 class_names = [
-    "Tempeh", "bibimbap", "cheesecake", "chicken Soto", "chicken noodle",
-    "chicken porridge", "chicken wings", "chocolate cake", "churros",
-    "cup cakes", "donuts", "fish and chips", "french fries",
-    "french toast", "fried shrimp", "fried rice", "gado-gado",
-    "green bean porridge", "grilled chicken", "gyoza", "hamburger",
-    "hot dog", "ice cream", "ikan bakar", "kupat tahu", "lasagna",
-    "macaroni and cheese", "macarons", "meatball", "yellow rice",
-    "uduk rice", "omelette", "oxtail soup", "oysters", "pad thai",
-    "pancakes", "pizza", "ramen", "red velvet cake", "rendang",
-    "risotto", "samosa", "sashimi", "satay", "spaghetti bolognese",
-    "spaghetti carbonara", "spring rolls", "steak", "sushi", "tacos",
-    "takoyaki", "tiramisu", "waffles",
+    "Bibimbap",
+    "Cheesecake",
+    "Chicken Noodle",
+    "Chicken Porridge",
+    "Chicken Soto",
+    "Chicken Wings",
+    "Chocolate Cake",
+    "Churros",
+    "Cupcakes",
+    "Donuts",
+    "Fish and Chips",
+    "French Fries",
+    "French Toast",
+    "Fried Rice",
+    "Fried Shrimp",
+    "Gado-Gado",
+    "Green Bean Porridge",
+    "Grilled Chicken",
+    "Gyoza",
+    "Hamburger",
+    "Hot Dog",
+    "Ice Cream",
+    "Ikan Bakar",
+    "Kupat Tahu",
+    "Lasagna",
+    "Macaroni and Cheese",
+    "Macarons",
+    "Meatball",
+    "Omelette",
+    "Oxtail Soup",
+    "Oysters",
+    "Pad Thai",
+    "Pancakes",
+    "Pizza",
+    "Ramen",
+    "Red Velvet Cake",
+    "Rendang",
+    "Risotto",
+    "Samosa",
+    "Sashimi",
+    "Satay",
+    "Spaghetti Bolognese",
+    "Spaghetti Carbonara",
+    "Spring Rolls",
+    "Steak",
+    "Sushi",
+    "Tacos",
+    "Takoyaki",
+    "Tempeh",
+    "Tiramisu",
+    "Uduk Rice",
+    "Waffles",
+    "Yellow Rice"
 ]
 
 app = Flask(__name__)
+
 
 def preprocess_image(image):
     image = image.convert("RGB")  # Konversi ke RGB
@@ -29,6 +71,7 @@ def preprocess_image(image):
     image_array = np.array(image) / 255.0
     image_array = np.expand_dims(image_array, axis=0)
     return image_array
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -56,7 +99,7 @@ def predict():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("port", 8080)))
