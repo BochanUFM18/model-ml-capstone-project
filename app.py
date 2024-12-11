@@ -13,7 +13,7 @@ class_names = [
     "french toast", "fried shrimp", "fried rice", "gado-gado",
     "green bean porridge", "grilled chicken", "gyoza", "hamburger",
     "hot dog", "ice cream", "ikan bakar", "kupat tahu", "lasagna",
-    "macaroni and cheese", "macarons", "meatball", "nasi kuning",
+    "macaroni and cheese", "macarons", "meatball", "Yellow Rice",
     "nasi uduk", "omelette", "oxtail soup", "oysters", "pad thai",
     "pancakes", "pizza", "ramen", "red velvet cake", "rendang",
     "risotto", "samosa", "sashimi", "satay", "spaghetti bolognese",
