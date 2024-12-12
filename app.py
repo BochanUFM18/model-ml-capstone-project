@@ -67,7 +67,7 @@ app = Flask(__name__)
 
 
 def preprocess_image(image):
-    # image = image.convert("RGB")  # Konversi ke RGB
+    image = image.convert("RGB")  # Konversi ke RGB
     image = image.resize((224, 224))
     image_array = np.array(image) / 255.0
     image_array = np.expand_dims(image_array, axis=0)
